@@ -6,6 +6,9 @@ class User extends Model {
     public name!: string
     public email!: string
 
+
+    
+
 }
 
   User.init({
@@ -34,5 +37,7 @@ class User extends Model {
       sequelize: db,
       tableName: "users"
   })
+
+
 
   export default User;

@@ -7,7 +7,7 @@ const { PORT = 4000 } = process.env;
     
     await db.authenticate();
 
-    await db.sync({ force: true});
+    await db.sync();
 
     console.log('DB Connected')
 
