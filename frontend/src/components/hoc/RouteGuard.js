@@ -9,3 +9,11 @@ export const AuthRoute = ({ component, ...rest }) => {
 
   return <Redirect to="/login" />;
 };
+
+export const GuestRoute = ({ component, ...rest }) => {
+  if (!isAuthenticated()) {
+    return <Route component={component} {...rest} />;
+  }
+
+  return <Redirect to="/dashboard" />;
+};

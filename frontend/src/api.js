@@ -19,3 +19,7 @@ httpClient.interceptors.request.use(request => {
 export const Login = (email, password) => {
   return httpClient.post("login", { email, password });
 };
+
+export const RegisterUser = data => {
+  return httpClient.post("register", data);
+};
