@@ -23,3 +23,7 @@ export const Login = (email, password) => {
 export const RegisterUser = data => {
   return httpClient.post("register", data);
 };
+
+export const FetchUsers = () => {
+  return httpClient.get("users");
+};

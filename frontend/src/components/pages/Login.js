@@ -4,8 +4,10 @@ import { Formik, Field, ErrorMessage } from "formik";
 import { setToken } from "../../lib/TokenManager";
 import { Login as LoginRequest } from "../../api";
 import { LOGIN_VALIDATION_SCHEMA } from "../../validations";
+import { connect } from "react-redux";
+import { login } from "../../actions/auth-actions";
 
-const Login = ({ history }) => {
+const Login = ({ history, dispatch, login, authUser }) => {
   return (
     <div>
       <h1>Login</h1>
@@ -18,11 +20,11 @@ const Login = ({ history }) => {
         onSubmit={values => {
           console.log("Values ", values);
           const { email, password } = values;
-          LoginRequest(email, password).then(res => {
+          login(email, password).then(res => {
             console.log("Re", res);
+            console.log("Atuh user", authUser);
             const { token = null } = res.data;
             if (token) {
-              setToken(token);
               history.push("/dashboard");
             }
           });
@@ -46,6 +48,14 @@ const Login = ({ history }) => {
                   Login
                 </button>
               </div>
+              <button
+                type="button"
+                onClick={() => {
+                  dispatch({ type: "TEST", payload: "Hello world" });
+                }}
+              >
+                Test
+              </button>
             </form>
           );
         }}
@@ -54,4 +64,11 @@ const Login = ({ history }) => {
   );
 };
 
-export default withRouter(Login);
+function mapStateToProps(state) {
+  return {
+    authUser: state.auth,
+    test: state.test
+  };
+}
+
+export default connect(mapStateToProps, { login })(withRouter(Login));

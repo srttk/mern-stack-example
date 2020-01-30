@@ -22,7 +22,7 @@ export const Login = async (req: Request, res: Response) => {
      * Generate token
      */
 
-    const token = sign({ id:user.id}, config.appSecret, { expiresIn: '1h'})
+    const token = sign({ id:user.id, firstName: user.firstName}, config.appSecret, { expiresIn: '1h'})
 
    
     res.json({message: "Loggedin successfully", token})

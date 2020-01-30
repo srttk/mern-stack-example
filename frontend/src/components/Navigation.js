@@ -1,26 +1,39 @@
 import React from "react";
+import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { removeToken } from "../lib/TokenManager";
 import { Link } from "react-router-dom";
+import { logout } from "../actions/auth-actions";
 
-const Navigation = ({ history }) => {
+const Navigation = ({ history, logout, auth }) => {
   return (
     <nav>
       <Link to="/">Home</Link>
-      <Link to="/login">Login</Link>
-      <Link to="/register">Register</Link>
-      <a
-        href="#"
-        onClick={() => {
-          removeToken();
-          history.push("/login");
-        }}
-      >
-        {" "}
-        Logout{" "}
-      </a>
+      {!auth && (
+        <span>
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
+        </span>
+      )}
+
+      {auth && (
+        <a
+          href="#"
+          onClick={() => {
+            logout();
+            history.push("/login");
+          }}
+        >
+          Logout
+          {" " + auth.firstName}
+        </a>
+      )}
     </nav>
   );
 };
+function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  };
+}
 
-export default withRouter(Navigation);
+export default connect(mapStateToProps, { logout })(withRouter(Navigation));

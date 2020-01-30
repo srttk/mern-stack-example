@@ -3,7 +3,9 @@ import db from '../db'
 
 class User extends Model {
     public id!:number
-    public name!: string
+    public firstName!: string
+    public lastName!: string
+    public password!: string
     public email!: string
 
 
