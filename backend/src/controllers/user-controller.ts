@@ -14,9 +14,11 @@ export const Login = async (req: Request, res: Response) => {
 
     const {email, password } = req.body;
 
-    const user = await User.findOne({ where: {email:email}})
+    const user:any = await User.findOne({ where: {email:email}})
 
     if(!user) throw new AuthenticationError('User not found')
+
+    if(password !== user.password) throw new AuthenticationError('Incorect password')
 
     /**
      * Generate token
@@ -34,6 +36,8 @@ export const Register = async (req: Request, res: Response) => {
    // TODO : Validation
 
     const { firstName, lastName, email, password } = req.body;
+
+    // TODO password hashing
 
     // Check user exists or not
 

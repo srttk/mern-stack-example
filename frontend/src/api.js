@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getToken } from "./lib/TokenManager";
 
-const httpClient = new axios.create({
+export const httpClient = new axios.create({
   baseURL: "http://localhost:4000/api/"
 });
 

@@ -7,7 +7,7 @@ import { LOGIN_VALIDATION_SCHEMA } from "../../validations";
 import { connect } from "react-redux";
 import { login } from "../../actions/auth-actions";
 
-const Login = ({ history, dispatch, login, authUser }) => {
+const Login = ({ history, dispatch, login }) => {
   return (
     <div>
       <h1>Login</h1>
@@ -22,7 +22,7 @@ const Login = ({ history, dispatch, login, authUser }) => {
           const { email, password } = values;
           login(email, password).then(res => {
             console.log("Re", res);
-            console.log("Atuh user", authUser);
+
             const { token = null } = res.data;
             if (token) {
               history.push("/dashboard");
@@ -48,14 +48,6 @@ const Login = ({ history, dispatch, login, authUser }) => {
                   Login
                 </button>
               </div>
-              <button
-                type="button"
-                onClick={() => {
-                  dispatch({ type: "TEST", payload: "Hello world" });
-                }}
-              >
-                Test
-              </button>
             </form>
           );
         }}
@@ -66,9 +58,8 @@ const Login = ({ history, dispatch, login, authUser }) => {
 
 function mapStateToProps(state) {
   return {
-    authUser: state.auth,
-    test: state.test
+    authUser: state.auth
   };
 }
 
-export default connect(mapStateToProps, { login })(withRouter(Login));
+export default connect(null, { login })(withRouter(Login));

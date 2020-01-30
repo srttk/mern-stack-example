@@ -1,8 +1,8 @@
 import React from "react";
-
+import "./ListItem.css";
 const ListItem = ({ user }) => {
   return (
-    <div>
+    <div className="list-item">
       <div>
         {user.firstName} {user.lastName}
       </div>
