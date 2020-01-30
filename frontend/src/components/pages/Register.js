@@ -17,7 +17,6 @@ const Register = ({ history }) => {
         }}
         validationSchema={REGISTER_VALIDATION_SCHEMA}
         onSubmit={values => {
-          console.log("Values ", values);
           RegisterUser(values).then(res => {
             history.push("/login");
           });

@@ -13,16 +13,13 @@ const Login = ({ history, dispatch, login }) => {
       <h1>Login</h1>
       <Formik
         initialValues={{
-          email: "sarath@gmx.com",
-          password: "1234"
+          email: "",
+          password: ""
         }}
         validationSchema={LOGIN_VALIDATION_SCHEMA}
         onSubmit={values => {
-          console.log("Values ", values);
           const { email, password } = values;
           login(email, password).then(res => {
-            console.log("Re", res);
-
             const { token = null } = res.data;
             if (token) {
               history.push("/dashboard");
